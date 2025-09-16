@@ -1,6 +1,10 @@
 from PyQt5 import QtWidgets, QtCore
 import sys
 from Data import ComData  
+import json
+
+with open("config.json", "r") as jsonFile:
+    config = json.load(jsonFile)
 
 class Overlay(QtWidgets.QWidget):
     def __init__(self):
@@ -18,11 +22,11 @@ class Overlay(QtWidgets.QWidget):
 
         # Надпись
         self.label = QtWidgets.QLabel(self)
-        self.label.setStyleSheet("""
-            color: #00FF00;  /* зеленый текст */
-            font-size: 10pt;
+        self.label.setStyleSheet(f"""
+            color: #{config["color"]};  /* цвет текста */
+            font-size: {config["font size"]}pt;
             font-weight: standart;
-            background: rgba(0,0,0,0); /* прозрачный фон */
+            background: rgba({config["background rgba"]}); /* фон */
         """)
         self.label.move(0, 0)
 
